@@ -26,7 +26,7 @@ class IdentificationsFragment : Fragment(), IdentificationsView {
         savedInstanceState: Bundle?
     ): View {
         baseActivity = activity as BaseActivity
-        mView = inflater.inflate(R.layout.fragment_likes, container, false)
+        mView = inflater.inflate(R.layout.fragment_identifications, container, false)
         workflow = Application.getWorkflow()
         presenter = IdentificationsPresenter(this, workflow)
         initViews()

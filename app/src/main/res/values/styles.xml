@@ -1,14 +1,32 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorWhite</item>
-        <item name="colorPrimaryDark">@color/colorWhite</item>
+        <item name="colorPrimary">@color/colorBlack</item>
+        <item name="colorPrimaryDark">@color/colorBlack</item>
         <item name="colorAccent">@color/colorBlack</item>
-        <item name="actionMenuTextColor">@color/colorWhite</item>
+        <item name="actionMenuTextColor">@color/colorBlack</item>
         <item name="android:textCursorDrawable">@color/colorBlack</item>
         <item name="actionBarSize">0dp</item>
         <item name="windowActionBarOverlay">true</item>
-        <item name="android:listDivider">@color/colorWhite</item>
+        <item name="android:listDivider">@color/colorBlack</item>
+    </style>
+
+    <style name="mCircularProgress">
+        <item name="cpd_padding">0dp</item>
+        <item name="cpd_initialAngle">0</item>
+        <item name="cpd_maxSweepAngle">270</item>
+        <item name="cpd_minSweepAngle">1</item>
+        <item name="cpd_strokeSize">2dp</item>
+        <item name="cpd_strokeColor">@color/colorDarkGrey</item>
+        <item name="cpd_strokeSecondaryColor">@color/colorDarkGrey</item>
+        <item name="cpd_reverse">false</item>
+        <item name="cpd_rotateDuration">700</item>
+        <item name="cpd_transformDuration">600</item>
+        <item name="cpd_keepDuration">200</item>
+        <item name="cpd_transformInterpolator">@android:anim/decelerate_interpolator</item>
+        <item name="pv_progressMode">buffer</item>
+        <item name="cpd_inAnimDuration">0</item>
+        <item name="cpd_outAnimDuration">@android:integer/config_mediumAnimTime</item>
     </style>
 
 </resources>

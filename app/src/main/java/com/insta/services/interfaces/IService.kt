@@ -17,8 +17,8 @@ interface IService {
      * Get Photos By Username
      * @return
      */
-    @GET("/users/{username}/portfolio")
-    fun getPhotosBtUserName(
+    @GET("/users/{username}/photos")
+    fun getPhotosByUserName(
         @Path("username") username: String,
         @Query("stats") stats: Boolean
     ): Observable<Array<Photo>>

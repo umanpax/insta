@@ -36,4 +36,8 @@ class BaseTabsAdapter(
     override fun getCount(): Int {
         return mNumOfTabs
     }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return listFragment[position].tag
+    }
 }

@@ -79,7 +79,7 @@ class PhotosAdapter(
         }
 
         holder.constraintItemPhoto?.setOnClickListener {
-           // presenter?.toDetails(photo)
+            presenter?.toDetails(photo)
         }
 
     }

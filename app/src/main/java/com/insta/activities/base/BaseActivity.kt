@@ -2,6 +2,7 @@ package com.insta.activities.base
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -29,6 +30,7 @@ open class BaseActivity : AppCompatActivity() {
     private lateinit var profileFragment: ProfileFragment
     private var listFragments = ArrayList<Fragment>()
     private lateinit var tvUsername : TextView
+    private lateinit var imvBack : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,7 @@ open class BaseActivity : AppCompatActivity() {
     private fun initViews() {
         tvUsername = findViewById(R.id.tv_username)
         tabLayout = findViewById(R.id.tab_layout)
+        imvBack = findViewById(R.id.imv_back)
     }
 
     private fun fillViews(){
@@ -66,6 +69,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun initBaseListeners() {
+        imvBack.setOnClickListener{finish()}
     }
 
     private fun initBaseTabs() {
@@ -84,10 +88,9 @@ open class BaseActivity : AppCompatActivity() {
         }
 
         val viewPager = findViewById<View>(R.id.view_pager_base) as ViewPager
-        viewPager.offscreenPageLimit = 1
+        viewPager.offscreenPageLimit = 5
         val tabsAdapter = BaseTabsAdapter(supportFragmentManager, tabLayout.tabCount,
             listFragments)
-        tabLayout.visibility = View.GONE
         viewPager.adapter = tabsAdapter
         viewPager.currentItem = 0
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))

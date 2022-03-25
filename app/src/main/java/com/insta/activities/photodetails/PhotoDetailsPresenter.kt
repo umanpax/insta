@@ -13,6 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import org.reactivestreams.Subscription
 import retrofit2.HttpException
 import java.io.IOException
+import java.util.ArrayList
 
 class PhotoDetailsPresenter(var view: PhotoDetailsActivity, var workflow: Workflow) {
 
@@ -56,23 +57,21 @@ class PhotoDetailsPresenter(var view: PhotoDetailsActivity, var workflow: Workfl
     }
 
 
-    fun getPhotoStatisticsById(id: String, token: String) {
+    fun getPhotosStatistics(
+        listPhotos: ArrayList<Photo>,
+        token: String
+    ) {
+        val listStatistics = ArrayList<Statistics>()
         dataManagerAccessor = DataManager(ApplicationConstants.BASE_URL)
-        dataManagerAccessor.getPhotoStatisticsById(id, token)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        io.reactivex.Observable.fromIterable(listPhotos.toMutableList())
+            .flatMap { dataManagerAccessor.getPhotoStatisticsById(it.id, token) }
             .subscribe(object : Observer<Statistics> {
-
-                override fun onNext(response: Statistics) {
-                    response.let { view.handlePhotoStatistics(it) }
-                }
-
                 override fun onSubscribe(d: Disposable) {
 
                 }
 
-                override fun onComplete() {
-
+                override fun onNext(response: Statistics) {
+                    listStatistics.add(response)
                 }
 
                 override fun onError(e: Throwable) {
@@ -87,7 +86,11 @@ class PhotoDetailsPresenter(var view: PhotoDetailsActivity, var workflow: Workfl
                     }
                 }
 
+                override fun onComplete() {
+                    view.handlePhotoStatistics(listStatistics)
+                }
             })
+
     }
 
 }

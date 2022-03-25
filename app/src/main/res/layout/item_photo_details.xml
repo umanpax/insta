@@ -11,7 +11,7 @@
     android:layout_marginTop="0dp"
     android:background="@color/colortransparent"
     android:paddingHorizontal="0dp"
-    android:paddingBottom="14dp">
+    android:paddingBottom="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_actuality"
@@ -26,7 +26,7 @@
         <ImageView
             android:id="@+id/imv_photo_content"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="500dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
