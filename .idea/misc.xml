@@ -18,6 +18,8 @@
         <entry key="app/src/main/res/drawable/ic_kebab_vertical.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_liked.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_likes.xml" value="0.103" />
+        <entry key="app/src/main/res/drawable/layout_radius_corners_22.xml" value="0.102" />
+        <entry key="app/src/main/res/drawable/layout_radius_corners_8.xml" value="0.102" />
         <entry key="app/src/main/res/layout/action_bar.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_base.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_details.xml" value="0.2557291666666667" />
@@ -30,9 +32,10 @@
         <entry key="app/src/main/res/layout/fragment_igtv.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/fragment_likes.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.23385416666666667" />
-        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.23385416666666667" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_photo.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/item_photo_details.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_result_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/tab_view_add.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/tab_view_grid.xml" value="0.23385416666666667" />
         <entry key="app/src/main/res/layout/tab_view_home.xml" value="0.23385416666666667" />

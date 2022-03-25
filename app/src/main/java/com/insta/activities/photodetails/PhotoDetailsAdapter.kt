@@ -16,7 +16,12 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.insta.R
 import com.insta.model.Photo
 import com.insta.model.Statistics
+import com.insta.utils.Application
+import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class PhotoDetailsAdapter(
@@ -84,10 +89,12 @@ class PhotoDetailsAdapter(
 
         holder.tvUserNameAuthor?.text = photo.user.username
         holder.tvDescPhoto?.text = photo.description
-        holder.tvDatePhoto?.text = photo.created_at
+        val creationDate = Application.convertToFormatSpecific(ApplicationConstants.yyyyMMdd, ApplicationConstants.ddMMyyyy, photo.created_at.split("T")[0])
+        holder.tvDatePhoto?.text = creationDate
         holder.tvCountLikesPhoto?.text = statistic.likes.total.toString()
         holder.tvCountLikesPhoto?.text = view?.getString(R.string.count_likes,statistic.likes.total.toString())
         holder.tvDownloadsCountPhoto?.text = view?.getString(R.string.count_downloads,statistic.downloads.total.toString())
+        holder.tvColourCodePhoto?.text = photo.color
         holder.viewRoundColor?.background?.setTint(Color.parseColor(photo.color))
     }
 

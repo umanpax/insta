@@ -21,7 +21,6 @@ class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsView {
 
     private lateinit var presenter: PhotoDetailsPresenter
     private lateinit var prefsManager: PrefsManager
-    private val sdf = SimpleDateFormat("yyyy-mm-dd HH:mm:ss")
     private var workflow = Workflow()
     private lateinit var photo : Photo
     private lateinit var adapter: PhotoDetailsAdapter
@@ -58,7 +57,7 @@ class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsView {
     private fun getPhotoUserInformation(){
         if (intent.hasExtra(ApplicationConstants.PHOTO)) {
             photo = intent.extras!!.get(ApplicationConstants.PHOTO) as Photo
-            presenter.getPhotosByUserName(photo.user.username, true, ApplicationConstants.ACCESS_KEY)
+            presenter.getPhotosByUserName(photo.user.username, false, ApplicationConstants.ACCESS_KEY)
             startLoader()
         }
     }

@@ -1,23 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_search_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/colorWhite">
+
 
 
     <TextView
-        android:id="@+id/tv_fragment_title"
+        android:id="@+id/tv_fill_artist_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:text="@string/fragment_search"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="26dp"
+        android:drawablePadding="16dp"
+        android:gravity="start"
+        android:text="@string/fill_author_name"
+        android:fontFamily="@font/nunitoregular"
         android:textColor="@color/colorBlack"
-        android:textSize="40sp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_search"
+        android:layout_width="300dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/layout_radius_corners_22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_fill_artist_username">
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:background="@null"
+            android:hint="@string/search_photo"
+            android:textSize="16sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/imv_delete_text"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/et_search"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/layout_radius_corners_8"
+        android:backgroundTint="@color/colorBlack"
+        android:hint="@string/search_photo"
+        android:text="@string/search"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint_search"
+        tools:ignore="ContentDescription" />
+
+
+
+
+    <TextView
+        android:id="@+id/tv_msg_searching"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="22dp"
+        android:text="@string/searching_msg"
+        android:visibility = "gone"
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp"
+        android:fontFamily="@font/nunitoregular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/btn_search"
         />
+
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="16dp"
+        android:background="@color/colorDarkGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_msg_searching" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colortransparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_line">
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_photo_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:animationCache="false"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:fadeScrollbars="true"
+        android:nestedScrollingEnabled="false"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        android:scrollingCache="false"
+        android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_line"
+        tools:itemCount="9"
+        tools:listitem="@layout/item_result_search" />
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,14 +10,12 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import org.reactivestreams.Subscription
 import retrofit2.HttpException
 import java.io.IOException
 import java.util.ArrayList
 
 class PhotoDetailsPresenter(var view: PhotoDetailsActivity, var workflow: Workflow) {
 
-    private lateinit var mSubscription: Subscription
     private lateinit var dataManagerAccessor: DataManager
 
 

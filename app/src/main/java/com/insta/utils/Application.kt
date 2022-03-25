@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.insta.R
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -31,7 +34,8 @@ class Application {
 
         @SuppressLint("MissingPermission")
         fun isNetworkAvailable(context: Context): Boolean {
-            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val activeNetworkInfo = connectivityManager.activeNetworkInfo
             return activeNetworkInfo != null && activeNetworkInfo.isConnected
         }
@@ -66,6 +70,22 @@ class Application {
             )
             snackbar.show()
         }
+
+
+        @SuppressLint("SimpleDateFormat")
+        fun convertToFormatSpecific(
+            mInputFormat: String,
+            mOutputFormat: String,
+            dateString: String
+        ): String {
+            val inputFormat: DateFormat = SimpleDateFormat(mInputFormat)
+            val outputFormat: DateFormat = SimpleDateFormat(mOutputFormat)
+            val inputDateStr = dateString
+            val date: Date = inputFormat.parse(inputDateStr)
+            val outputDateStr: String = outputFormat.format(date)
+            return outputDateStr
+        }
+
 
     }
 
