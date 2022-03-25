@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Insta</string>
+    <string name="fragment_likes">LIKES</string>
+    <string name="fragment_search">SEARCH</string>
+    <string name="fragment_profile">PROFILE</string>
+    <string name="fragment_add">ADD</string>
+    <string name="fragment_igtv">IGTV</string>
+    <string name="fragment_identifications">IDENTIFICATIONS</string>
+    <string name="count_likes"> %1$s Likes</string>
+    <string name="count_downloads"> %1$s Downloads</string>
+    <string name="error_msg">Error while retrieving data ! Please try later !</string>
+</resources>
