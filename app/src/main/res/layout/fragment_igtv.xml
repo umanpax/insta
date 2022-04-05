@@ -12,7 +12,6 @@
         android:scaleType="centerCrop"
         android:text="@string/fragment_igtv"
         android:textColor="@color/colorBlack"
-        android:fontFamily="@font/nunitoregular"
         android:textSize="40sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

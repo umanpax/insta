@@ -11,7 +11,7 @@
     android:layout_marginTop="0dp"
     android:background="@color/colortransparent"
     android:paddingHorizontal="0dp"
-    android:paddingBottom="16dp">
+    android:paddingBottom="14dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_actuality"
@@ -26,7 +26,7 @@
         <ImageView
             android:id="@+id/imv_photo_content"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="300dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,9 +84,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Matthieu Chedid"
-                    android:fontFamily="@font/nunitoextrabold"
                     android:textColor="@color/colorBlack"
-                    android:textSize="17sp"/>
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -155,7 +155,7 @@
             android:text="Its time to clean after baking:)"
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
-            android:fontFamily="@font/nunitoextrabold"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraint_footer_action_buttons" />
 
@@ -170,7 +170,6 @@
             android:gravity="start"
             android:text="2020-02-27"
             android:textColor="@color/colorBlack"
-            android:fontFamily="@font/nunitoregular"
             android:textSize="18sp"
             android:textStyle="bold"
             app:drawableStartCompat="@drawable/ic_calendar"
@@ -187,7 +186,6 @@
             android:drawablePadding="20dp"
             android:gravity="start"
             android:text="5 Likes"
-            android:fontFamily="@font/nunitoregular"
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -205,7 +203,6 @@
             android:drawablePadding="16dp"
             android:gravity="start"
             android:text="0 Downloads"
-            android:fontFamily="@font/nunitoregular"
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -222,7 +219,6 @@
             android:drawablePadding="16dp"
             android:gravity="start"
             android:text="#261F19"
-            android:fontFamily="@font/nunitoregular"
             android:textColor="@color/colorBlack"
             android:textSize="18sp"
             android:textStyle="bold"

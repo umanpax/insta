@@ -43,10 +43,6 @@ class HomeFragment : Fragment(), HomeView {
         return mView
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        baseActivity = activity as BaseActivity
-    }
 
     private fun initFragments() {
         gridFragment = GridFragment()
@@ -73,9 +69,10 @@ class HomeFragment : Fragment(), HomeView {
         }
 
         val viewPager = v.findViewById<View>(R.id.view_pager_home) as ViewPager
-        viewPager.offscreenPageLimit = 3
+        viewPager.offscreenPageLimit = 1
         val tabsAdapter = HomeTabsAdapter(baseActivity.supportFragmentManager, tabLayout.tabCount,
             listFragments)
+        tabLayout.visibility = View.GONE
         viewPager.adapter = tabsAdapter
         viewPager.currentItem = 0
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))

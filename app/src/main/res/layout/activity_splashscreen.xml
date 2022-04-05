@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imv_logo"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:background="@drawable/ic_insta"
         android:backgroundTint="@color/colorRedError"
         app:layout_constraintTop_toTopOf="parent"

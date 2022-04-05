@@ -13,7 +13,6 @@
         android:text="@string/fragment_profile"
         android:textColor="@color/colorBlack"
         android:textSize="40sp"
-        android:fontFamily="@font/nunitoregular"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

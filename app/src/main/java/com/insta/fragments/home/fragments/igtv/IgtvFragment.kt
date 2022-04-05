@@ -26,7 +26,7 @@ class IgtvFragment : Fragment(), IgtvView {
         savedInstanceState: Bundle?
     ): View {
         baseActivity = activity as BaseActivity
-        mView = inflater.inflate(R.layout.fragment_igtv, container, false)
+        mView = inflater.inflate(R.layout.fragment_likes, container, false)
         workflow = Application.getWorkflow()
         presenter = IgtvPresenter(this, workflow)
         initViews()

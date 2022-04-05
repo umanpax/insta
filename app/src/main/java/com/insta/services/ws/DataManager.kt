@@ -27,7 +27,7 @@ class DataManager {
 
     fun getPhotoByUserName(username : String, stats : Boolean, token : String): Observable<Array<Photo>> {
         val service = serviceGenerator.createService(IService::class.java,token)
-        return service.getPhotosByUserName(username, stats)
+        return service.getPhotosBtUserName(username, stats)
     }
 
     fun getPhotos(perPage : Int, token : String): Observable<Array<Photo>> {

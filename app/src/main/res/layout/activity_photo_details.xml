@@ -29,6 +29,7 @@
         tools:listitem="@layout/item_photo_details" />
 
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_scroll_up"
         android:layout_width="wrap_content"
@@ -40,24 +41,5 @@
         app:tint="@color/colorWhite"
         android:layout_margin="16dp"
         tools:ignore="ContentDescription" />
-
-
-    <TextView
-        android:id="@+id/tv_please_wait"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="22dp"
-        android:text="@string/wait_msg"
-        android:visibility = "gone"
-        android:textColor="@color/colorBlack"
-        android:textSize="40sp"
-        android:fontFamily="@font/nunitoextrabold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

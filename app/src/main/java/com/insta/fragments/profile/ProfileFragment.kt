@@ -35,12 +35,6 @@ class ProfileFragment : Fragment(), ProfileView {
         return mView
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        baseActivity = activity as BaseActivity
-    }
-
-
     private fun initPrefs() {
         prefsManager = PrefsManager(requireContext())
     }

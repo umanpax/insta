@@ -5,11 +5,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_insta"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_insta"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.Insta">
 
         <activity
             android:name="com.insta.activities.splashscreen.SplashScreenActivity"

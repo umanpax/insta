@@ -10,7 +10,7 @@ data class Statistics(
     var downloads: Downloads = Downloads(),
     @SerializedName("views")
     var views: Views = Views(),
-    @SerializedName("likes")
+    @SerializedName("downloads")
     var likes: Likes = Likes()
 ) : Serializable
 

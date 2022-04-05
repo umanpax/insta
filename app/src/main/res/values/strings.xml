@@ -9,11 +9,4 @@
     <string name="count_likes"> %1$s Likes</string>
     <string name="count_downloads"> %1$s Downloads</string>
     <string name="error_msg">Error while retrieving data ! Please try later !</string>
-    <string name="count_results_search">%1$s results !</string>
-    <string name="empty_search">You have to fill a value ;)</string>
-    <string name="wait_msg">Loading …</string>
-    <string name="searching_msg">Searching …</string>
-    <string name="search_photo">Artist\'s username</string>
-    <string name="search">Search !</string>
-    <string name="fill_author_name">Fill an author\'s name here ! :)</string>
 </resources>

@@ -10,7 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:fontFamily="@font/nunitoregular"
         android:text="@string/fragment_add"
         android:textColor="@color/colorBlack"
         android:textSize="40sp"

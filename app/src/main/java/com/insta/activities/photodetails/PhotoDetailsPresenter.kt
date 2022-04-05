@@ -10,12 +10,13 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.reactivestreams.Subscription
 import retrofit2.HttpException
 import java.io.IOException
-import java.util.ArrayList
 
 class PhotoDetailsPresenter(var view: PhotoDetailsActivity, var workflow: Workflow) {
 
+    private lateinit var mSubscription: Subscription
     private lateinit var dataManagerAccessor: DataManager
 
 
@@ -55,21 +56,23 @@ class PhotoDetailsPresenter(var view: PhotoDetailsActivity, var workflow: Workfl
     }
 
 
-    fun getPhotosStatistics(
-        listPhotos: ArrayList<Photo>,
-        token: String
-    ) {
-        val listStatistics = ArrayList<Statistics>()
+    fun getPhotoStatisticsById(id: String, token: String) {
         dataManagerAccessor = DataManager(ApplicationConstants.BASE_URL)
-        io.reactivex.Observable.fromIterable(listPhotos.toMutableList())
-            .flatMap { dataManagerAccessor.getPhotoStatisticsById(it.id, token) }
+        dataManagerAccessor.getPhotoStatisticsById(id, token)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<Statistics> {
+
+                override fun onNext(response: Statistics) {
+                    response.let { view.handlePhotoStatistics(it) }
+                }
+
                 override fun onSubscribe(d: Disposable) {
 
                 }
 
-                override fun onNext(response: Statistics) {
-                    listStatistics.add(response)
+                override fun onComplete() {
+
                 }
 
                 override fun onError(e: Throwable) {
@@ -84,11 +87,7 @@ class PhotoDetailsPresenter(var view: PhotoDetailsActivity, var workflow: Workfl
                     }
                 }
 
-                override fun onComplete() {
-                    view.handlePhotoStatistics(listStatistics)
-                }
             })
-
     }
 
 }

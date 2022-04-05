@@ -50,7 +50,7 @@ class SplashScreenActivity : ComponentActivity(), SplashScreenView {
         val msg = Message()
         msg.what = STOPSPLASH
         splashHandler.sendMessageDelayed(msg, SPLASHTIME)
-        presenter.getUserByUserName(ApplicationConstants.USERNAME, ApplicationConstants.ACCESS_KEY)
+        presenter.getUserByUserName("paxvez", ApplicationConstants.ACCESS_KEY)
     }
 
     override fun handleUserByUserName(response: User) {
