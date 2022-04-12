@@ -10,10 +10,7 @@ import androidx.core.app.ActivityCompat
 import com.insta.R
 import com.insta.activities.base.BaseActivity
 import com.insta.model.Photo
-import com.insta.utils.Application
-import com.insta.utils.ApplicationConstants
-import com.insta.utils.PrefsManager
-import com.insta.utils.Workflow
+import com.insta.utils.*
 
 
 /**
@@ -38,6 +35,7 @@ class SplashScreenActivity : ComponentActivity() {
             super.handleMessage(msg)
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
             StrictMode.setThreadPolicy(policy)
+            KoinApplication()
         }
     }
 

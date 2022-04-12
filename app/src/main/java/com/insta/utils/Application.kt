@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.insta.R
+import com.insta.model.User
+import org.koin.dsl.module
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,6 +25,11 @@ import java.util.*
 
 class Application {
     companion object {
+
+        val moduleUser = module {
+            // provides single instance of Salut
+            single { User() }
+        }
 
         fun launchActivity(from: AppCompatActivity, to: Class<*>, closePreviousActivity: Boolean) {
             val i = Intent(from, to)
