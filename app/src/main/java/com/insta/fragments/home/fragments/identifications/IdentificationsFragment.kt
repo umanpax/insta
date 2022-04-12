@@ -12,9 +12,9 @@ import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
 
 
-class IdentificationsFragment : Fragment(), IdentificationsView {
+class IdentificationsFragment : Fragment() {
     private lateinit var prefsManager: PrefsManager
-    private lateinit var presenter: IdentificationsPresenter
+    private lateinit var viewModel: IdentificationsViewModel
     private var workflow = Workflow()
     private lateinit var mView: View
     private lateinit var baseActivity: BaseActivity
@@ -26,9 +26,9 @@ class IdentificationsFragment : Fragment(), IdentificationsView {
         savedInstanceState: Bundle?
     ): View {
         baseActivity = activity as BaseActivity
-        mView = inflater.inflate(R.layout.fragment_likes, container, false)
+        mView = inflater.inflate(R.layout.fragment_identifications, container, false)
         workflow = Application.getWorkflow()
-        presenter = IdentificationsPresenter(this, workflow)
+        viewModel = IdentificationsViewModel()
         initViews()
         fillViews()
         initPrefs()
@@ -51,7 +51,4 @@ class IdentificationsFragment : Fragment(), IdentificationsView {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

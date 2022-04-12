@@ -1,6 +1,7 @@
 package com.insta.fragments.home.fragments.grid
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
@@ -15,23 +16,25 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.insta.R
+import com.insta.activities.photodetails.PhotoDetailsActivity
 import com.insta.model.Photo
+import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
 
 class PhotosAdapter(
     listPhotos: ArrayList<Photo>,
     view: Context,
-    presenter: GridPresenter
+    viewModel: GridViewModel
 ) : RecyclerView.Adapter<PhotosAdapter.DisplayPhotoAlbumView>() {
 
     private var listPhotos: ArrayList<Photo>? = listPhotos
     private var prefsManager: PrefsManager? = null
     private var view: Context? = null
-    private var presenter: GridPresenter? = null
+    private var viewModel: GridViewModel? = null
 
     init {
         prefsManager = PrefsManager(view.applicationContext)
-        this.presenter = presenter
+        this.viewModel = viewModel
         this.view = view
     }
 
@@ -79,8 +82,11 @@ class PhotosAdapter(
         }
 
         holder.constraintItemPhoto?.setOnClickListener {
-           // presenter?.toDetails(photo)
+            val intent = Intent(view, PhotoDetailsActivity::class.java)
+            intent.putExtra(ApplicationConstants.PHOTO, photo)
+            view?.startActivity(intent)
         }
+
 
     }
 

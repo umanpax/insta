@@ -1,4 +1,5 @@
 package com.insta.fragments.add
 
-interface AddView {
+class AddViewModel() {
+
 }

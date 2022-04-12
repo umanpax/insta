@@ -33,7 +33,7 @@
         android:text="Matt"
         android:textColor="@color/colorBlack"
         android:textSize="15sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/nunitoextrabold"
         android:visibility="visible"
         app:drawableEndCompat="@drawable/ic_badge"
         android:drawablePadding = "5dp"

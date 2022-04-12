@@ -1,5 +1,6 @@
 package com.insta.fragments.home.fragments.grid
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +11,15 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.insta.activities.base.BaseActivity
 import com.insta.utils.Application
 import com.insta.R
-import com.insta.fragments.home.fragments.grid.GridPresenter
-import com.insta.fragments.home.fragments.grid.GridView
-import com.insta.fragments.home.fragments.grid.PhotosAdapter
+import com.insta.activities.photodetails.PhotoDetailsActivity
 import com.insta.model.Photo
+import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
 
-class GridFragment : Fragment(), GridView {
+class GridFragment : Fragment() {
     private lateinit var prefsManager: PrefsManager
-    private lateinit var presenter: GridPresenter
+    private lateinit var viewModel: GridViewModel
     private var workflow = Workflow()
     private lateinit var mView: View
     private lateinit var baseActivity: BaseActivity
@@ -37,7 +37,7 @@ class GridFragment : Fragment(), GridView {
         prefsManager = PrefsManager(requireContext())
         workflow = Application.getWorkflow()
         mView = inflater.inflate(R.layout.fragment_grid, container, false)
-        presenter = GridPresenter(this, workflow)
+        viewModel = GridViewModel()
         initViews(mView)
         fillViews()
         initListeners()
@@ -50,7 +50,7 @@ class GridFragment : Fragment(), GridView {
         adapterPhotos = PhotosAdapter(
             listPhotos,
             baseActivity,
-            presenter
+            viewModel
         )
         val sGridLayoutManager = StaggeredGridLayoutManager(
             3,
@@ -73,9 +73,5 @@ class GridFragment : Fragment(), GridView {
 
     private fun fillViews() {
 
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 }

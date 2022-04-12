@@ -11,9 +11,9 @@ import com.insta.R
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
 
-class ProfileFragment : Fragment(), ProfileView {
+class ProfileFragment : Fragment() {
     private lateinit var prefsManager: PrefsManager
-    private lateinit var presenter: ProfilePresenter
+    private lateinit var viewModel: ProfileViewModel
     private var workflow = Workflow()
     private lateinit var mView: View
     private lateinit var baseActivity: BaseActivity
@@ -27,13 +27,19 @@ class ProfileFragment : Fragment(), ProfileView {
         baseActivity = activity as BaseActivity
         mView = inflater.inflate(R.layout.fragment_profile, container, false)
         workflow = Application.getWorkflow()
-        presenter = ProfilePresenter(this, workflow)
+        viewModel = ProfileViewModel()
         initViews()
         fillViews()
         initPrefs()
         initListeners()
         return mView
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        baseActivity = activity as BaseActivity
+    }
+
 
     private fun initPrefs() {
         prefsManager = PrefsManager(requireContext())

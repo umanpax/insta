@@ -12,9 +12,9 @@ import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
 
 
-class IgtvFragment : Fragment(), IgtvView {
+class IgtvFragment : Fragment() {
     private lateinit var prefsManager: PrefsManager
-    private lateinit var presenter: IgtvPresenter
+    private lateinit var viewModel: IgtvViewModel
     private var workflow = Workflow()
     private lateinit var mView: View
     private lateinit var baseActivity: BaseActivity
@@ -26,9 +26,9 @@ class IgtvFragment : Fragment(), IgtvView {
         savedInstanceState: Bundle?
     ): View {
         baseActivity = activity as BaseActivity
-        mView = inflater.inflate(R.layout.fragment_likes, container, false)
+        mView = inflater.inflate(R.layout.fragment_igtv, container, false)
         workflow = Application.getWorkflow()
-        presenter = IgtvPresenter(this, workflow)
+        viewModel = IgtvViewModel()
         initViews()
         fillViews()
         initPrefs()
@@ -51,7 +51,4 @@ class IgtvFragment : Fragment(), IgtvView {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

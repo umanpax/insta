@@ -11,9 +11,9 @@ import com.insta.R
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
 
-class AddFragment : Fragment(), AddView {
+class AddFragment : Fragment() {
     private lateinit var prefsManager: PrefsManager
-    private lateinit var presenter: AddPresenter
+    private lateinit var viewModel: AddViewModel
     private var workflow = Workflow()
     private lateinit var mView: View
     private lateinit var baseActivity: BaseActivity
@@ -27,13 +27,19 @@ class AddFragment : Fragment(), AddView {
         baseActivity = activity as BaseActivity
         mView = inflater.inflate(R.layout.fragment_add, container, false)
         workflow = Application.getWorkflow()
-        presenter = AddPresenter(this, workflow)
+        viewModel = AddViewModel()
         initViews()
         fillViews()
         initPrefs()
         initListeners()
         return mView
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        baseActivity = activity as BaseActivity
+    }
+
 
     private fun initPrefs() {
         prefsManager = PrefsManager(requireContext())

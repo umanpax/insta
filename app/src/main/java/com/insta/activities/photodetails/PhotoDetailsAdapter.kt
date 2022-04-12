@@ -2,6 +2,7 @@ package com.insta.activities.photodetails
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,26 +11,32 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.insta.R
 import com.insta.model.Photo
+import com.insta.model.Statistics
+import com.insta.utils.Application
+import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
+import kotlin.collections.ArrayList
 
 
 class PhotoDetailsAdapter(
-    mListPhotos: ArrayList<Photo>,
+    mListPhotosStatistics: Pair<ArrayList<Photo>,ArrayList<Statistics>>,
     mView: Context,
-    mPresenter: PhotoDetailsPresenter
+    mViewModel: PhotoDetailsViewModel
 ) :
     RecyclerView.Adapter<PhotoDetailsAdapter.ActualityView>() {
-    private var listPhotos: ArrayList<Photo>? = null
+    private var listPhotosStatistics: Pair<ArrayList<Photo>,ArrayList<Statistics>>? = null
     private var prefsManager: PrefsManager? = null
     private var view: Context? = null
-    private var presenter: PhotoDetailsPresenter? = null
+    private var viewModel: PhotoDetailsViewModel? = null
 
     init {
         view = mView
-        presenter = mPresenter
-        listPhotos = mListPhotos
+        viewModel = mViewModel
+        listPhotosStatistics = mListPhotosStatistics
         prefsManager = PrefsManager(mView)
     }
 
@@ -59,27 +66,34 @@ class PhotoDetailsAdapter(
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "Range")
     override fun onBindViewHolder(holder: ActualityView, position: Int) {
         holder.setIsRecyclable(false)
-        val photo = listPhotos!![position]
+        val photo = listPhotosStatistics!!.first[position]
+        val statistic = listPhotosStatistics!!.second[position]
 
         if (photo.urls.full.isNotEmpty()) {
             Glide.with(view!!)
-                .load(photo.urls.full)
+                .load(photo.urls.regular)
                 .into(holder.imvPhotoContent!!)
         }
 
         if (photo.user.profile_image.small.isNotEmpty()) {
             Glide.with(view!!)
-                .load(photo.user.profile_image.small)
+                .load(photo.user.profile_image.medium)
+                .transform( CenterCrop(), RoundedCorners(60))
                 .into(holder.imvPhotoProfileAuthor!!)
         }
 
         holder.tvUserNameAuthor?.text = photo.user.username
         holder.tvDescPhoto?.text = photo.description
-        holder.tvDescPhoto?.text = photo.description
-
+        val creationDate = Application.convertToFormatSpecific(ApplicationConstants.yyyyMMdd, ApplicationConstants.ddMMyyyy, photo.created_at.split("T")[0])
+        holder.tvDatePhoto?.text = creationDate
+        holder.tvCountLikesPhoto?.text = statistic.likes.total.toString()
+        holder.tvCountLikesPhoto?.text = view?.getString(R.string.count_likes,statistic.likes.total.toString())
+        holder.tvDownloadsCountPhoto?.text = view?.getString(R.string.count_downloads,statistic.downloads.total.toString())
+        holder.tvColourCodePhoto?.text = photo.color
+        holder.viewRoundColor?.background?.setTint(Color.parseColor(photo.color))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActualityView {
@@ -89,7 +103,7 @@ class PhotoDetailsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return listPhotos!!.size
+        return listPhotosStatistics!!.first.size
     }
 
     override fun getItemViewType(position: Int): Int {

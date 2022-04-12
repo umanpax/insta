@@ -29,6 +29,15 @@
             android:textColor="@color/colorWhite"
             app:tint="@color/colorBlack" />
 
+        <View
+            android:id="@+id/view_round_color"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/layout_circle"
+            android:backgroundTint="@color/colorRedDark" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

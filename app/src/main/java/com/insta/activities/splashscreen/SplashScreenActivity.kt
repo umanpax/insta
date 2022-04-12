@@ -1,13 +1,15 @@
 package com.insta.activities.splashscreen
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.*
 import android.os.StrictMode
 import androidx.activity.ComponentActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import com.insta.R
+import com.insta.activities.base.BaseActivity
 import com.insta.model.Photo
-import com.insta.model.User
 import com.insta.utils.Application
 import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
@@ -18,10 +20,10 @@ import com.insta.utils.Workflow
  * Created by pierre-alexandrevezinet on 24/03/2022.
  */
 
-class SplashScreenActivity : ComponentActivity(), SplashScreenView {
+class SplashScreenActivity : ComponentActivity() {
 
     private val STOPSPLASH = 0
-    private lateinit var presenter: SplashScreenPresenter
+    private lateinit var viewModel: SplashScreenViewModel
     private lateinit var prefsManager: PrefsManager
     private lateinit var constraintLayout: ConstraintLayout
     private var workflow = Workflow()
@@ -45,27 +47,42 @@ class SplashScreenActivity : ComponentActivity(), SplashScreenView {
         setContentView(R.layout.activity_splashscreen)
         Application.changeStatusBarColor(this, R.color.colorWhite)
         constraintLayout = findViewById(R.id.splash_layout)
-        presenter = SplashScreenPresenter(this, workflow)
+        viewModel = SplashScreenViewModel()
         prefsManager = PrefsManager(this)
         val msg = Message()
         msg.what = STOPSPLASH
         splashHandler.sendMessageDelayed(msg, SPLASHTIME)
-        presenter.getUserByUserName("paxvez", ApplicationConstants.ACCESS_KEY)
-    }
-
-    override fun handleUserByUserName(response: User) {
         Workflow.Singleton.INSTANCE = Workflow()
-        workflow.user = response
-        presenter.getPhotos(20, ApplicationConstants.ACCESS_KEY)
+        initData()
+        initObservers()
+
     }
 
-    override fun handlePhotos(response: Array<Photo>) {
-        workflow.listPhotosByUserName.addAll(response)
-        Workflow.Singleton.INSTANCE!!.getInstance().updateInstance(workflow)
-        presenter.toInsta()
+    private fun initData() {
+        viewModel.getUserByUserName(ApplicationConstants.USERNAME, ApplicationConstants.ACCESS_KEY)
     }
 
-    override fun toggleError(response: String) {
-        Application.showSnackBar(this, constraintLayout, getString(R.string.error_msg))
+    @SuppressLint("SetTextI18n")
+    private fun initObservers() {
+        viewModel.liveDataUser.observe(this) { user ->
+            workflow.user = user
+            viewModel.getPhotos(20, ApplicationConstants.ACCESS_KEY)
+        }
+        viewModel.liveDataPhotos.observe(this) { photos ->
+            workflow.listPhotosByUserName = photos.toMutableList() as ArrayList<Photo>
+            Workflow.Singleton.INSTANCE!!.getInstance().updateInstance(workflow)
+            toInsta()
+        }
+
+        viewModel.liveDataError.observe(this){ error ->
+            Application.showSnackBar(this, constraintLayout, getString(R.string.error_msg))
+        }
     }
+
+    private fun toInsta() {
+        ActivityCompat.finishAffinity(this)
+        val intent = Intent(this, BaseActivity::class.java)
+        startActivity(intent)
+    }
+
 }

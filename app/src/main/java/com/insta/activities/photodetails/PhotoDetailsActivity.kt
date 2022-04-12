@@ -2,10 +2,12 @@ package com.insta.activities.photodetails
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.insta.R
 import com.insta.model.Photo
 import com.insta.model.Statistics
@@ -13,65 +15,86 @@ import com.insta.utils.Application
 import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
-import java.text.SimpleDateFormat
 
-class PhotoDetailsActivity : AppCompatActivity(), PhotoDetailsView {
+class PhotoDetailsActivity : AppCompatActivity() {
 
-    private lateinit var presenter: PhotoDetailsPresenter
+    private lateinit var viewModel: PhotoDetailsViewModel
     private lateinit var prefsManager: PrefsManager
-    private val sdf = SimpleDateFormat("yyyy-mm-dd HH:mm:ss")
     private var workflow = Workflow()
     private lateinit var photo : Photo
     private lateinit var adapter: PhotoDetailsAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var listPhotos : ArrayList<Photo>
-    private lateinit var statistics: Statistics
     private lateinit var constraintLayout : ConstraintLayout
+    private lateinit var fbtScrollTop : FloatingActionButton
+    private  var listStatistics =  ArrayList<Statistics>()
+    private lateinit var listsPhotosStatistics : Pair<ArrayList<Photo>, ArrayList<Statistics>>
+    private lateinit var tvPleaseWait : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_details)
-        initViews()
         workflow = Application.getWorkflow()
+        viewModel = PhotoDetailsViewModel()
         prefsManager = PrefsManager(this)
+        initViews()
+        initListeners()
+        initObservers()
         getPhotoUserInformation()
-        presenter = PhotoDetailsPresenter(this, workflow)
-        presenter.getPhotosByUserName("paxvez", true, ApplicationConstants.ACCESS_KEY)
-
     }
 
     private fun initViews(){
         constraintLayout = findViewById(R.id.constraint_main_photo_details)
+        tvPleaseWait = findViewById(R.id.tv_please_wait)
         recyclerView = findViewById(R.id.recycler_view_photo_details)
+        fbtScrollTop = findViewById(R.id.fab_scroll_up)
+    }
+
+    private fun initListeners(){
+        fbtScrollTop.setOnClickListener { recyclerView.smoothScrollToPosition(0) }
     }
 
     private fun getPhotoUserInformation(){
         if (intent.hasExtra(ApplicationConstants.PHOTO)) {
-            photo = intent.extras!!.get("join_piece") as Photo
+            photo = intent.extras!!.get(ApplicationConstants.PHOTO) as Photo
+            viewModel.getPhotosByUserName(photo.user.username, false, ApplicationConstants.ACCESS_KEY)
+            startLoader()
         }
     }
 
-    fun initRecycler() {
-        adapter = PhotoDetailsAdapter(listPhotos, this,presenter)
+    private fun initObservers(){
+        viewModel.liveDataPhotos.observe(this){photos ->
+            listPhotos = ArrayList()
+            listPhotos.addAll(photos)
+            viewModel.getPhotosStatistics(listPhotos,ApplicationConstants.ACCESS_KEY)
+        }
+
+        viewModel.liveDataStatistics.observe(this){statistics ->
+            listStatistics = statistics.toMutableList() as ArrayList<Statistics>
+            listsPhotosStatistics = Pair(listPhotos,listStatistics)
+            initRecycler()
+        }
+
+        viewModel.liveDataError.observe(this){error ->
+            Application.showSnackBar(this, constraintLayout, getString(R.string.error_msg))
+            stopLoader()
+        }
+    }
+
+    private fun initRecycler() {
+        adapter = PhotoDetailsAdapter(listsPhotosStatistics, this,viewModel)
         val llm = LinearLayoutManager(this)
         llm.orientation = RecyclerView.VERTICAL
         recyclerView.visibility = View.VISIBLE
         recyclerView.layoutManager = llm
         recyclerView.adapter = adapter
+        stopLoader()
     }
 
-    override fun handlePhotosByUsername(response: Array<Photo>) {
-        listPhotos = ArrayList()
-        listPhotos.addAll(response)
-        initRecycler()
+    private fun startLoader(){
+        tvPleaseWait.visibility = View.VISIBLE
     }
-
-    override fun handlePhotoStatistics(response: Statistics) {
-        statistics = response
+    private fun stopLoader(){
+        tvPleaseWait.visibility = View.GONE
     }
-
-    override fun toggleError(response: String) {
-        Application.showSnackBar(this, constraintLayout, getString(R.string.error_msg))
-    }
-
 }

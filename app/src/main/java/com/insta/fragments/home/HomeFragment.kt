@@ -16,9 +16,9 @@ import com.insta.fragments.home.fragments.igtv.IgtvFragment
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
 
-class HomeFragment : Fragment(), HomeView {
+class HomeFragment : Fragment() {
     private lateinit var prefsManager: PrefsManager
-    private lateinit var presenter: HomePresenter
+    private lateinit var viewModel: HomeViewModel
     private var workflow = Workflow()
     private lateinit var mView: View
     private lateinit var baseActivity: BaseActivity
@@ -37,12 +37,16 @@ class HomeFragment : Fragment(), HomeView {
         prefsManager = PrefsManager(requireContext())
         workflow = Application.getWorkflow()
         mView = inflater.inflate(R.layout.fragment_home, container, false)
-        presenter = HomePresenter(this, workflow)
+        viewModel = HomeViewModel()
         initFragments()
         initBaseTabs(mView)
         return mView
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        baseActivity = activity as BaseActivity
+    }
 
     private fun initFragments() {
         gridFragment = GridFragment()
@@ -69,10 +73,9 @@ class HomeFragment : Fragment(), HomeView {
         }
 
         val viewPager = v.findViewById<View>(R.id.view_pager_home) as ViewPager
-        viewPager.offscreenPageLimit = 1
+        viewPager.offscreenPageLimit = 3
         val tabsAdapter = HomeTabsAdapter(baseActivity.supportFragmentManager, tabLayout.tabCount,
             listFragments)
-        tabLayout.visibility = View.GONE
         viewPager.adapter = tabsAdapter
         viewPager.currentItem = 0
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))

@@ -3,12 +3,13 @@ package com.insta.activities.splashscreen
 import android.content.Intent
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.insta.activities.base.BaseActivity
 import com.insta.model.Photo
 import com.insta.model.User
 import com.insta.services.ws.DataManager
 import com.insta.utils.ApplicationConstants
-import com.insta.utils.Workflow
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -17,9 +18,13 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.util.*
 
-class SplashScreenPresenter(var view: SplashScreenActivity, var workflow: Workflow) {
+class SplashScreenViewModel : ViewModel() {
 
     private lateinit var dataManagerAccessor: DataManager
+
+    var liveDataUser = MutableLiveData<User>()
+    var liveDataPhotos = MutableLiveData<Array<Photo>>()
+    var liveDataError = MutableLiveData<String>()
 
     fun getUserByUserName(username : String, token :String) {
         dataManagerAccessor = DataManager(ApplicationConstants.BASE_URL)
@@ -30,7 +35,7 @@ class SplashScreenPresenter(var view: SplashScreenActivity, var workflow: Workfl
             .subscribe(object : Observer<User> {
 
                 override fun onNext(response: User) {
-                    response.let { view.handleUserByUserName(response) }
+                    liveDataUser.postValue(response)
                 }
 
                 override fun onSubscribe(d: Disposable) {
@@ -45,7 +50,7 @@ class SplashScreenPresenter(var view: SplashScreenActivity, var workflow: Workfl
                     if (e is HttpException) {
                         val body = e.response()?.errorBody()
                         try {
-                            view.toggleError(body.toString())
+                            liveDataError.postValue(body.toString())
                         } catch (e: IOException) {
                             Log.d("test", " Error in parsing")
 
@@ -55,7 +60,6 @@ class SplashScreenPresenter(var view: SplashScreenActivity, var workflow: Workfl
 
             })
     }
-
 
 
     fun getPhotos(perPage : Int, token :String) {
@@ -67,7 +71,9 @@ class SplashScreenPresenter(var view: SplashScreenActivity, var workflow: Workfl
             .subscribe(object : Observer<Array<Photo>> {
 
                 override fun onNext(response: Array<Photo>) {
-                    response.let { view.handlePhotos(it) }
+                    response.let {
+                        liveDataPhotos.postValue(it)
+                    }
                 }
 
                 override fun onSubscribe(d: Disposable) {
@@ -82,7 +88,7 @@ class SplashScreenPresenter(var view: SplashScreenActivity, var workflow: Workfl
                     if (e is HttpException) {
                         val body = e.response()?.errorBody()
                         try {
-                            view.toggleError(body.toString())
+                            liveDataError.postValue(body.toString())
                         } catch (e: IOException) {
                             Log.d("test", " Error in parsing")
 
@@ -92,13 +98,4 @@ class SplashScreenPresenter(var view: SplashScreenActivity, var workflow: Workfl
 
             })
     }
-
-
-    fun toInsta() {
-        ActivityCompat.finishAffinity(view)
-        val intent = Intent(view, BaseActivity::class.java)
-        view.startActivity(intent)
-    }
-
-
 }
