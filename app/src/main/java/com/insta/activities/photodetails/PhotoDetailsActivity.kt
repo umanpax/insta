@@ -17,6 +17,7 @@ import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PhotoDetailsActivity : AppCompatActivity() {
 
@@ -32,8 +33,8 @@ class PhotoDetailsActivity : AppCompatActivity() {
     private lateinit var listsPhotosStatistics : Pair<ArrayList<Photo>, ArrayList<Statistics>>
     private lateinit var tvPleaseWait : TextView
 
-    private val photoViewModel by inject<PhotoDetailsViewModel>()
-    private val searchViewModel by inject<SearchViewModel>()
+    private val photoViewModel by viewModel<PhotoDetailsViewModel>()
+    private val searchViewModel by viewModel<SearchViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
