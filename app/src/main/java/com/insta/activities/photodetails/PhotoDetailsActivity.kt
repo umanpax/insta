@@ -16,7 +16,6 @@ import com.insta.utils.Application
 import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PhotoDetailsActivity : AppCompatActivity() {
