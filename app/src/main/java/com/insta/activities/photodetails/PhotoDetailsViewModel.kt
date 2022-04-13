@@ -9,11 +9,12 @@ import com.insta.services.ws.DataManager
 import com.insta.utils.ApplicationConstants
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import org.koin.core.component.KoinComponent
 import retrofit2.HttpException
 import java.io.IOException
 import java.util.ArrayList
 
-class PhotoDetailsViewModel : ViewModel() {
+class PhotoDetailsViewModel : ViewModel() , KoinComponent {
 
     private lateinit var dataManagerAccessor: DataManager
 

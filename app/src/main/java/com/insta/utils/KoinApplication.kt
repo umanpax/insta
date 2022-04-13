@@ -12,7 +12,7 @@ class KoinApplication: Application() {
         // start koin
         startKoin {
             androidContext(this@KoinApplication)
-            modules(listOf(AppModule.moduleViewModel,AppModule.moduleRepository))
+            modules(listOf(AppModule.searchViewModel,AppModule.photoViewModel,AppModule.moduleRepository))
         }
     }
 }

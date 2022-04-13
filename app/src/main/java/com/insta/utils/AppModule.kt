@@ -12,9 +12,13 @@ class AppModule {
         val moduleRepository = module {
             single { Repository() }
         }
-        val moduleViewModel = module {
+        val searchViewModel = module {
             viewModel{
                 SearchViewModel()
+            }
+        }
+        val photoViewModel = module {
+            viewModel{
                 PhotoDetailsViewModel()
             }
         }
