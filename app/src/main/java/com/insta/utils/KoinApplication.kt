@@ -1,7 +1,9 @@
 package com.insta.utils
 
 import android.app.Application
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+
 
 class KoinApplication: Application() {
 
@@ -9,9 +11,8 @@ class KoinApplication: Application() {
         super.onCreate()
         // start koin
         startKoin {
-            modules(AppModule.moduleUser)
-            modules(AppModule.moduleListPhotos)
-            modules(AppModule.viewModels)
+            androidContext(this@KoinApplication)
+            modules(listOf(AppModule.moduleViewModel,AppModule.moduleRepository))
         }
     }
 }

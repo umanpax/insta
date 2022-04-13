@@ -10,15 +10,17 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.koin.core.component.KoinComponent
 import retrofit2.HttpException
 import java.io.IOException
 
 
-class SearchViewModel : ViewModel() {
+class SearchViewModel : ViewModel(), KoinComponent {
 
     private lateinit var dataManagerAccessor: DataManager
-    var liveDataPhotos = MutableLiveData<Array<Photo>>()
-    var liveDataError = MutableLiveData<String>()
+     val liveDataPhotos = MutableLiveData<Array<Photo>>()
+     val liveDataError = MutableLiveData<String>()
+
 
     fun getPhotosByUserName(userName: String, stats: Boolean, token: String) {
         dataManagerAccessor = DataManager(ApplicationConstants.BASE_URL)

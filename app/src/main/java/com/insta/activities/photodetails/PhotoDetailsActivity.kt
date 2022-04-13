@@ -9,16 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.insta.R
+import com.insta.fragments.search.SearchViewModel
 import com.insta.model.Photo
 import com.insta.model.Statistics
 import com.insta.utils.Application
 import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
+import org.koin.android.ext.android.inject
 
 class PhotoDetailsActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: PhotoDetailsViewModel
     private lateinit var prefsManager: PrefsManager
     private var workflow = Workflow()
     private lateinit var photo : Photo
@@ -31,12 +32,15 @@ class PhotoDetailsActivity : AppCompatActivity() {
     private lateinit var listsPhotosStatistics : Pair<ArrayList<Photo>, ArrayList<Statistics>>
     private lateinit var tvPleaseWait : TextView
 
+    private val photoViewModel by inject<PhotoDetailsViewModel>()
+    private val searchViewModel by inject<SearchViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_details)
         workflow = Application.getWorkflow()
-        viewModel = PhotoDetailsViewModel()
         prefsManager = PrefsManager(this)
+
         initViews()
         initListeners()
         initObservers()
@@ -57,32 +61,37 @@ class PhotoDetailsActivity : AppCompatActivity() {
     private fun getPhotoUserInformation(){
         if (intent.hasExtra(ApplicationConstants.PHOTO)) {
             photo = intent.extras!!.get(ApplicationConstants.PHOTO) as Photo
-            viewModel.getPhotosByUserName(photo.user.username, false, ApplicationConstants.ACCESS_KEY)
+            searchViewModel.getPhotosByUserName(photo.user.username, false, ApplicationConstants.ACCESS_KEY)
             startLoader()
         }
     }
 
     private fun initObservers(){
-        viewModel.liveDataPhotos.observe(this){photos ->
+        searchViewModel.liveDataPhotos.observe(this){photos ->
             listPhotos = ArrayList()
             listPhotos.addAll(photos)
-            viewModel.getPhotosStatistics(listPhotos,ApplicationConstants.ACCESS_KEY)
+            photoViewModel.getPhotosStatistics(listPhotos,ApplicationConstants.ACCESS_KEY)
         }
 
-        viewModel.liveDataStatistics.observe(this){statistics ->
+        photoViewModel.liveDataStatistics.observe(this){statistics ->
             listStatistics = statistics.toMutableList() as ArrayList<Statistics>
             listsPhotosStatistics = Pair(listPhotos,listStatistics)
             initRecycler()
         }
 
-        viewModel.liveDataError.observe(this){error ->
+        searchViewModel.liveDataError.observe(this){error ->
+            Application.showSnackBar(this, constraintLayout, getString(R.string.error_msg))
+            stopLoader()
+        }
+
+        photoViewModel.liveDataError.observe(this){error ->
             Application.showSnackBar(this, constraintLayout, getString(R.string.error_msg))
             stopLoader()
         }
     }
 
     private fun initRecycler() {
-        adapter = PhotoDetailsAdapter(listsPhotosStatistics, this,viewModel)
+        adapter = PhotoDetailsAdapter(listsPhotosStatistics, this,photoViewModel)
         val llm = LinearLayoutManager(this)
         llm.orientation = RecyclerView.VERTICAL
         recyclerView.visibility = View.VISIBLE

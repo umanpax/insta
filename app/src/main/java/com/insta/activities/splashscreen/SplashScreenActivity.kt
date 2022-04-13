@@ -35,7 +35,6 @@ class SplashScreenActivity : ComponentActivity() {
             super.handleMessage(msg)
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
             StrictMode.setThreadPolicy(policy)
-            KoinApplication()
         }
     }
 

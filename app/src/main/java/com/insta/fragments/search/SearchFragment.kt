@@ -19,6 +19,7 @@ import com.insta.model.Photo
 import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
+import org.koin.android.ext.android.inject
 
 class SearchFragment : Fragment() {
     private lateinit var prefsManager: PrefsManager
@@ -34,7 +35,7 @@ class SearchFragment : Fragment() {
     private lateinit var buttonSearch: Button
     private lateinit var constraintLayout: ConstraintLayout
     private lateinit var listPhotos: ArrayList<Photo>
-
+    val searchViewModel by inject<SearchViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,11 +1,8 @@
 package com.insta.activities.splashscreen
 
-import android.content.Intent
 import android.util.Log
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.insta.activities.base.BaseActivity
 import com.insta.model.Photo
 import com.insta.model.User
 import com.insta.services.ws.DataManager
@@ -16,7 +13,6 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
 import java.io.IOException
-import java.util.*
 
 class SplashScreenViewModel : ViewModel() {
 

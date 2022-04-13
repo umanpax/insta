@@ -1,23 +1,23 @@
 package com.insta.utils
 
 import com.insta.activities.photodetails.PhotoDetailsViewModel
-import com.insta.model.Photo
-import com.insta.model.User
+import com.insta.fragments.search.SearchViewModel
+import com.insta.services.repositories.Repository
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+
 
 class AppModule {
     companion object {
-        val moduleUser = module {
-            single { User() }
+        val moduleRepository = module {
+            single { Repository() }
         }
-        val moduleListPhotos = module {
-            single { ArrayList<Photo>() }
-        }
-
-        val viewModels = module {
-            factory{
+        val moduleViewModel = module {
+            viewModel{
+                SearchViewModel()
                 PhotoDetailsViewModel()
             }
         }
+
     }
 }
