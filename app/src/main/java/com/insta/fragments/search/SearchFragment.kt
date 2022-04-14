@@ -19,11 +19,10 @@ import com.insta.model.Photo
 import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
     private lateinit var prefsManager: PrefsManager
-    private lateinit var viewModel: SearchViewModel
     private var workflow = Workflow()
     private lateinit var mView: View
     private lateinit var baseActivity: BaseActivity
@@ -35,7 +34,7 @@ class SearchFragment : Fragment() {
     private lateinit var buttonSearch: Button
     private lateinit var constraintLayout: ConstraintLayout
     private lateinit var listPhotos: ArrayList<Photo>
-    val searchViewModel by inject<SearchViewModel>()
+    private val searchViewModel by viewModel<SearchViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +45,6 @@ class SearchFragment : Fragment() {
         mView = inflater.inflate(R.layout.fragment_search, container, false)
         workflow = Application.getWorkflow()
         prefsManager = PrefsManager(requireContext())
-        viewModel = SearchViewModel()
         initViews(mView)
         initListeners()
         initObservers()
@@ -71,7 +69,7 @@ class SearchFragment : Fragment() {
     private fun initListeners() {
         buttonSearch.setOnClickListener {
             if (etSearch.text.isNotEmpty()) {
-                viewModel.getPhotosByUserName(etSearch.text.toString(), false, ApplicationConstants.ACCESS_KEY)
+                searchViewModel.getPhotosByUserName(etSearch.text.toString(), false, ApplicationConstants.ACCESS_KEY)
                 tvSearch_status.text = getString(R.string.searching_msg)
                 tvSearch_status.visibility = View.VISIBLE
             } else {
@@ -84,7 +82,7 @@ class SearchFragment : Fragment() {
 
 
     private fun initObservers(){
-        viewModel.liveDataPhotos.observe(baseActivity){ photos ->
+        searchViewModel.repository.liveDataPhotos.observe(baseActivity){ photos ->
             listPhotos = ArrayList()
             listPhotos.addAll(photos)
             tvSearch_status.text = baseActivity.getString(R.string.count_results_search,listPhotos.size.toString())
@@ -92,7 +90,7 @@ class SearchFragment : Fragment() {
             initRecycler()
         }
 
-        viewModel.liveDataError.observe(baseActivity){error ->
+        searchViewModel.repository.liveDataError.observe(baseActivity){error ->
             if(error == "404"){
                 listPhotos = ArrayList()
                 initRecycler()
@@ -106,7 +104,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        adapter = SearchPhotoAdapter(listPhotos, baseActivity, viewModel)
+        adapter = SearchPhotoAdapter(listPhotos, baseActivity, searchViewModel)
         val llm = LinearLayoutManager(baseActivity)
         llm.orientation = RecyclerView.VERTICAL
         recyclerView.visibility = View.VISIBLE

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.insta.R
-import com.insta.fragments.search.SearchViewModel
 import com.insta.model.Photo
 import com.insta.model.Statistics
 import com.insta.utils.Application
@@ -31,9 +30,7 @@ class PhotoDetailsActivity : AppCompatActivity() {
     private  var listStatistics =  ArrayList<Statistics>()
     private lateinit var listsPhotosStatistics : Pair<ArrayList<Photo>, ArrayList<Statistics>>
     private lateinit var tvPleaseWait : TextView
-
     private val photoViewModel by viewModel<PhotoDetailsViewModel>()
-    private val searchViewModel by viewModel<SearchViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,30 +58,25 @@ class PhotoDetailsActivity : AppCompatActivity() {
     private fun getPhotoUserInformation(){
         if (intent.hasExtra(ApplicationConstants.PHOTO)) {
             photo = intent.extras!!.get(ApplicationConstants.PHOTO) as Photo
-            searchViewModel.getPhotosByUserName(photo.user.username, false, ApplicationConstants.ACCESS_KEY)
+            photoViewModel.repository.getPhotosByUserName(photo.user.username, false, ApplicationConstants.ACCESS_KEY)
             startLoader()
         }
     }
 
     private fun initObservers(){
-        searchViewModel.liveDataPhotos.observe(this){photos ->
+        photoViewModel.repository.liveDataPhotos.observe(this){photos ->
             listPhotos = ArrayList()
             listPhotos.addAll(photos)
             photoViewModel.getPhotosStatistics(listPhotos,ApplicationConstants.ACCESS_KEY)
         }
 
-        photoViewModel.liveDataStatistics.observe(this){statistics ->
+        photoViewModel.repository.liveDataStatistics.observe(this){statistics ->
             listStatistics = statistics.toMutableList() as ArrayList<Statistics>
             listsPhotosStatistics = Pair(listPhotos,listStatistics)
             initRecycler()
         }
 
-        searchViewModel.liveDataError.observe(this){error ->
-            Application.showSnackBar(this, constraintLayout, getString(R.string.error_msg))
-            stopLoader()
-        }
-
-        photoViewModel.liveDataError.observe(this){error ->
+        photoViewModel.repository.liveDataError.observe(this){error ->
             Application.showSnackBar(this, constraintLayout, getString(R.string.error_msg))
             stopLoader()
         }
