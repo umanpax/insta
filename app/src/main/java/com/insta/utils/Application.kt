@@ -9,10 +9,10 @@ import android.view.View
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
 import com.insta.R
-import com.insta.model.User
-import org.koin.dsl.module
+import com.insta.services.room.InstaDatabase
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,9 +26,10 @@ import java.util.*
 class Application {
     companion object {
 
-        val moduleUser = module {
-            // provides single instance of Salut
-            single { User() }
+        fun getRoomDb(context: Context): InstaDatabase {
+            return Room.databaseBuilder(context, InstaDatabase::class.java, "insta")
+                .fallbackToDestructiveMigration()
+                .build()
         }
 
         fun launchActivity(from: AppCompatActivity, to: Class<*>, closePreviousActivity: Boolean) {

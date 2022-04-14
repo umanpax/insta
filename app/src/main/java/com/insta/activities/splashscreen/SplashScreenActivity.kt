@@ -69,6 +69,8 @@ class SplashScreenActivity : AppCompatActivity() {
         viewModel.repository.liveDataPhotos.observe(this) { photos ->
             workflow.listPhotosByUserName = photos.toMutableList() as ArrayList<Photo>
             Workflow.Singleton.INSTANCE!!.getInstance().updateInstance(workflow)
+            viewModel.insertUserRoom(this,workflow.user)
+            viewModel.insertPhotoRoom(this,workflow.listPhotosByUserName[0])
             toInsta()
         }
 

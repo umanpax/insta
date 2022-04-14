@@ -14,8 +14,9 @@ class KoinApplication : Application() {
                 listOf(
                     AppModule.searchViewModel,
                     AppModule.photoViewModel,
+                    AppModule.splashViewModel,
                     AppModule.moduleRepository,
-                    AppModule.splashViewModel
+                    AppModule.instaRoomRepository
                 )
             )
         }
