@@ -1,4 +1,4 @@
-package com.insta.services.room
+package com.insta.services.room.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -15,6 +15,6 @@ interface PhotoDaoAccessRoom {
      fun getPhotos(perPage: Int): LiveData<List<Photo>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPhoto(vararg photo: Photo)
+    suspend fun insertPhoto(vararg photo: Photo)
 
 }

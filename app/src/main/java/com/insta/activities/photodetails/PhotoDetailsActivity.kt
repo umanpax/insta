@@ -58,7 +58,7 @@ class PhotoDetailsActivity : AppCompatActivity() {
     private fun getPhotoUserInformation(){
         if (intent.hasExtra(ApplicationConstants.PHOTO)) {
             photo = intent.extras!!.get(ApplicationConstants.PHOTO) as Photo
-            photoViewModel.repository.getPhotosByUserName(photo.user.username, false, ApplicationConstants.ACCESS_KEY)
+            photoViewModel.repository.getPhotosByUserName(photo.user!!.username!!, false, ApplicationConstants.ACCESS_KEY)
             startLoader()
         }
     }

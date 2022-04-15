@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import com.insta.R
 import com.insta.activities.base.BaseActivity
 import com.insta.model.Photo
+import com.insta.services.room.repository.RoomRepository
 import com.insta.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -69,8 +70,8 @@ class SplashScreenActivity : AppCompatActivity() {
         viewModel.repository.liveDataPhotos.observe(this) { photos ->
             workflow.listPhotosByUserName = photos.toMutableList() as ArrayList<Photo>
             Workflow.Singleton.INSTANCE!!.getInstance().updateInstance(workflow)
-            viewModel.insertUserRoom(this,workflow.user)
-            viewModel.insertPhotoRoom(this,workflow.listPhotosByUserName[0])
+            viewModel.insertUser(this,workflow.user)
+            viewModel.insertPhoto(this,workflow.listPhotosByUserName[0])
             toInsta()
         }
 

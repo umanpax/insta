@@ -5,14 +5,14 @@ import androidx.lifecycle.ViewModel
 import com.insta.model.Photo
 import com.insta.model.User
 import com.insta.services.repositories.Repository
-import com.insta.services.room.InstaRepositoryRoom
+import com.insta.services.room.repository.RoomRepository
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class SplashScreenViewModel : ViewModel(), KoinComponent {
 
     val repository: Repository by inject()
-
+    val roomRepository: RoomRepository by inject()
 
     fun getUserByUserName(username : String, token :String) {
         repository.getUserByUserName(username, token)
@@ -22,12 +22,12 @@ class SplashScreenViewModel : ViewModel(), KoinComponent {
         repository.getPhotos(perPage, token)
     }
 
-    fun insertUserRoom(context: Context, user: User) {
-        InstaRepositoryRoom.insertUser(context,user)
+    fun insertUser(context: Context, user :User){
+        roomRepository.insertUser(context,user)
     }
 
-    fun insertPhotoRoom(context: Context, photo: Photo) {
-        InstaRepositoryRoom.insertPhoto(context,photo)
+    fun insertPhoto(context: Context, photo: Photo){
+        roomRepository.insertPhoto(context,photo)
     }
 
 }

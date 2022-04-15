@@ -62,18 +62,18 @@ class SearchPhotoAdapter(
         holder.setIsRecyclable(false)
         val photo = listPhotos!![position]
 
-        if (photo.urls.regular.isNotEmpty()) {
+        if (photo.urls!!.regular.isNotEmpty()) {
             Glide.with(view!!)
-                .load(photo.urls.regular)
+                .load(photo.urls!!.regular)
                 .transform(CenterCrop(), RoundedCorners(8))
                 .into(holder.imvAuthorSearch!!)
         }
 
-        holder.tvUserNameAuthor?.text = photo.user.username
+        holder.tvUserNameAuthor?.text = photo.user!!.username
         val creationDate = Application.convertToFormatSpecific(
             ApplicationConstants.yyyyMMdd,
             ApplicationConstants.ddMMyyyy,
-            photo.created_at.split("T")[0]
+            photo.created_at!!.split("T")[0]
         )
         holder.tvDateCreation?.text = creationDate
         holder.tvColourCodePhoto?.text = photo.color

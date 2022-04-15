@@ -26,8 +26,6 @@ class GridFragment : Fragment() {
     private lateinit var adapterPhotos: PhotosAdapter
     private lateinit var recyclerViewDisplayPhotoAlbum: RecyclerView
     private var listPhotos = ArrayList<Photo>()
-    val db = Application.getRoomDb(baseActivity)
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +41,6 @@ class GridFragment : Fragment() {
         fillViews()
         initListeners()
         initRecycler()
-        db.instaDao().getPhotos(20)
         return mView
     }
 

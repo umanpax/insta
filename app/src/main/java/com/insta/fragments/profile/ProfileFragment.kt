@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.insta.activities.base.BaseActivity
 import com.insta.utils.Application
@@ -17,7 +18,7 @@ class ProfileFragment : Fragment() {
     private var workflow = Workflow()
     private lateinit var mView: View
     private lateinit var baseActivity: BaseActivity
-
+    private lateinit var tvUserName : TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +29,9 @@ class ProfileFragment : Fragment() {
         mView = inflater.inflate(R.layout.fragment_profile, container, false)
         workflow = Application.getWorkflow()
         viewModel = ProfileViewModel()
-        initViews()
+        initData()
+        initObservers()
+        initViews(mView)
         fillViews()
         initPrefs()
         initListeners()
@@ -40,7 +43,6 @@ class ProfileFragment : Fragment() {
         baseActivity = activity as BaseActivity
     }
 
-
     private fun initPrefs() {
         prefsManager = PrefsManager(requireContext())
     }
@@ -48,15 +50,24 @@ class ProfileFragment : Fragment() {
     private fun initListeners() {
     }
 
-    private fun initViews() {
-
+    private fun initViews(v : View) {
+        tvUserName = v.findViewById(R.id.tv_fragment_profile_user_name)
     }
 
     private fun fillViews() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun initData(){
+        viewModel.getUserByUserName(baseActivity,"musicpax_")
+    }
+
+    private fun initObservers(){
+        viewModel.roomRepository.liveDataUser?.observe(baseActivity){ user ->
+            tvUserName.text  = user.username
+        }
+        viewModel.roomRepository.liveDataPhotos?.observe(baseActivity){ photo ->
+
+        }
     }
 }

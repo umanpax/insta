@@ -42,7 +42,7 @@ class PhotoConverter {
             json.getBoolean("liked_by_user"),
             json.getString("description"),
             json.get("user") as User,
-            json.get("current_user_collections") as CurrentUserCollections,
+            json.get("current_user_collections") as Array<CurrentUserCollection>,
             json.get("urls") as Urls,
             json.get("links") as Links,
         )

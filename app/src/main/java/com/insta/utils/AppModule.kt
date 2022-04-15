@@ -4,7 +4,7 @@ import com.insta.activities.photodetails.PhotoDetailsViewModel
 import com.insta.activities.splashscreen.SplashScreenViewModel
 import com.insta.fragments.search.SearchViewModel
 import com.insta.services.repositories.Repository
-import com.insta.services.room.InstaRepositoryRoom
+import com.insta.services.room.repository.RoomRepository
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -31,7 +31,7 @@ class AppModule {
         }
 
         val instaRoomRepository = module {
-            single { InstaRepositoryRoom() }
+            single { RoomRepository() }
         }
 
     }

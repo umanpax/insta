@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
 import com.insta.R
-import com.insta.services.room.InstaDatabase
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,11 +25,6 @@ import java.util.*
 class Application {
     companion object {
 
-        fun getRoomDb(context: Context): InstaDatabase {
-            return Room.databaseBuilder(context, InstaDatabase::class.java, "insta")
-                .fallbackToDestructiveMigration()
-                .build()
-        }
 
         fun launchActivity(from: AppCompatActivity, to: Class<*>, closePreviousActivity: Boolean) {
             val i = Intent(from, to)

@@ -1,4 +1,4 @@
-package com.insta.services.room
+package com.insta.services.room.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -17,7 +17,7 @@ interface UserDaoAccessRoom {
      fun getUserByUsername(username: String): LiveData<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUser(vararg user: User)
+     suspend fun insertUser(vararg user: User)
 
 
 }
