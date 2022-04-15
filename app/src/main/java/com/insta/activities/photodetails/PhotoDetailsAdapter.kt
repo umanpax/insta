@@ -72,22 +72,22 @@ class PhotoDetailsAdapter(
         val photo = listPhotosStatistics!!.first[position]
         val statistic = listPhotosStatistics!!.second[position]
 
-        if (photo.urls.full.isNotEmpty()) {
+        if (photo.urls!!.full.isNotEmpty()) {
             Glide.with(view!!)
-                .load(photo.urls.regular)
+                .load(photo.urls!!.regular)
                 .into(holder.imvPhotoContent!!)
         }
 
-        if (photo.user.profile_image.small.isNotEmpty()) {
+        if (photo.user?.profile_image!!.small.isNotEmpty()) {
             Glide.with(view!!)
-                .load(photo.user.profile_image.medium)
+                .load(photo.user!!.profile_image!!.medium)
                 .transform( CenterCrop(), RoundedCorners(60))
                 .into(holder.imvPhotoProfileAuthor!!)
         }
 
-        holder.tvUserNameAuthor?.text = photo.user.username
+        holder.tvUserNameAuthor?.text = photo.user!!.username
         holder.tvDescPhoto?.text = photo.description
-        val creationDate = Application.convertToFormatSpecific(ApplicationConstants.yyyyMMdd, ApplicationConstants.ddMMyyyy, photo.created_at.split("T")[0])
+        val creationDate = Application.convertToFormatSpecific(ApplicationConstants.yyyyMMdd, ApplicationConstants.ddMMyyyy, photo.created_at!!.split("T")[0])
         holder.tvDatePhoto?.text = creationDate
         holder.tvCountLikesPhoto?.text = statistic.likes.total.toString()
         holder.tvCountLikesPhoto?.text = view?.getString(R.string.count_likes,statistic.likes.total.toString())

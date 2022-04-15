@@ -5,14 +5,20 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 
-class KoinApplication: Application() {
-
+class KoinApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        // start koin
         startKoin {
             androidContext(this@KoinApplication)
-            modules(listOf(AppModule.searchViewModel,AppModule.photoViewModel,AppModule.moduleRepository))
+            modules(
+                listOf(
+                    AppModule.searchViewModel,
+                    AppModule.photoViewModel,
+                    AppModule.splashViewModel,
+                    AppModule.moduleRepository,
+                    AppModule.instaRoomRepository
+                )
+            )
         }
     }
 }

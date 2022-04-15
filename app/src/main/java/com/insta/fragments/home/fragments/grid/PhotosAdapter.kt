@@ -53,9 +53,9 @@ class PhotosAdapter(
         holder.setIsRecyclable(false)
         val photo = listPhotos!![position]
 
-        if (photo.urls.raw.isNotEmpty()) {
+        if (photo.urls!!.raw.isNotEmpty()) {
             Glide.with(view!!.applicationContext)
-                .load(photo.urls.small)
+                .load(photo.urls!!.small)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(

@@ -27,7 +27,6 @@ class GridFragment : Fragment() {
     private lateinit var recyclerViewDisplayPhotoAlbum: RecyclerView
     private var listPhotos = ArrayList<Photo>()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
