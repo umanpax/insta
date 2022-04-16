@@ -1,4 +1,4 @@
-package com.insta.activities.photodetails
+package com.insta.ui.photodetails
 
 import android.os.Bundle
 import android.view.View

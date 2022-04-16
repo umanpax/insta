@@ -1,4 +1,4 @@
-package com.insta.activities.base
+package com.insta.ui.base
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

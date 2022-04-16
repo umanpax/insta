@@ -12,7 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.insta.activities.base.BaseActivity
+import com.insta.ui.base.BaseActivity
 import com.insta.utils.Application
 import com.insta.R
 import com.insta.model.Photo

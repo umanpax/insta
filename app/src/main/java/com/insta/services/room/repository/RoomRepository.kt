@@ -2,7 +2,6 @@ package com.insta.services.room.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.insta.model.Photo
 import com.insta.model.User
 import com.insta.services.room.database.RoomDB

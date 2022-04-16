@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.insta.R
-import com.insta.activities.photodetails.PhotoDetailsActivity
+import com.insta.ui.photodetails.PhotoDetailsActivity
 import com.insta.model.Photo
 import com.insta.utils.Application
 import com.insta.utils.ApplicationConstants

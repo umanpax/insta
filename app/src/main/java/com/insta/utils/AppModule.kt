@@ -1,7 +1,7 @@
 package com.insta.utils
 
-import com.insta.activities.photodetails.PhotoDetailsViewModel
-import com.insta.activities.splashscreen.SplashScreenViewModel
+import com.insta.ui.photodetails.PhotoDetailsViewModel
+import com.insta.ui.splashscreen.SplashScreenViewModel
 import com.insta.fragments.search.SearchViewModel
 import com.insta.services.repositories.Repository
 import com.insta.services.room.repository.RoomRepository
