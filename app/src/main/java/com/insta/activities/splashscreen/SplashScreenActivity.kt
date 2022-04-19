@@ -1,4 +1,4 @@
-package com.insta.ui.splashscreen
+package com.insta.activities.splashscreen
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import com.insta.R
-import com.insta.ui.base.BaseActivity
+import com.insta.activities.base.BaseActivity
 import com.insta.model.Photo
 import com.insta.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -16,7 +16,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.insta.R
-import com.insta.ui.photodetails.PhotoDetailsActivity
+import com.insta.activities.photodetails.PhotoDetailsActivity
 import com.insta.model.Photo
 import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager

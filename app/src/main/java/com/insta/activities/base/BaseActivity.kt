@@ -1,4 +1,4 @@
-package com.insta.ui.base
+package com.insta.activities.base
 
 import android.os.Bundle
 import android.view.View

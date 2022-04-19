@@ -1,4 +1,4 @@
-package com.insta.ui.photodetails
+package com.insta.activities.photodetails
 
 import androidx.lifecycle.ViewModel
 import com.insta.model.Photo

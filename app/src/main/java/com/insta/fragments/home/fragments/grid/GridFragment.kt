@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.insta.ui.base.BaseActivity
+import com.insta.activities.base.BaseActivity
 import com.insta.utils.Application
 import com.insta.R
 import com.insta.model.Photo

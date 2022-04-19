@@ -1,4 +1,4 @@
-package com.insta.ui.splashscreen
+package com.insta.activities.splashscreen
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

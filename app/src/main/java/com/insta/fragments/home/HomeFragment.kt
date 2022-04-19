@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.insta.ui.base.BaseActivity
+import com.insta.activities.base.BaseActivity
 import com.insta.utils.Application
 import com.insta.R
 import com.insta.fragments.home.fragments.grid.GridFragment

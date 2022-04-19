@@ -14,7 +14,7 @@
         >
 
         <activity
-            android:name="com.insta.ui.splashscreen.SplashScreenActivity"
+            android:name="com.insta.activities.splashscreen.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
@@ -28,14 +28,14 @@
         </activity>
 
         <activity
-            android:name="com.insta.ui.base.BaseActivity"
+            android:name="com.insta.activities.base.BaseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan"
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name="com.insta.ui.photodetails.PhotoDetailsActivity"
+            android:name="com.insta.activities.photodetails.PhotoDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan"

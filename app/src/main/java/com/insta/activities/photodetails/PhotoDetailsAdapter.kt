@@ -1,4 +1,4 @@
-package com.insta.ui.photodetails
+package com.insta.activities.photodetails
 
 import android.annotation.SuppressLint
 import android.content.Context

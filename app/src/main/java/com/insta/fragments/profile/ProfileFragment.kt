@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.insta.ui.base.BaseActivity
+import com.insta.activities.base.BaseActivity
 import com.insta.utils.Application
 import com.insta.R
 import com.insta.utils.PrefsManager

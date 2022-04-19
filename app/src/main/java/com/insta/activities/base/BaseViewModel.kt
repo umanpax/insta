@@ -1,4 +1,4 @@
-package com.insta.ui.base
+package com.insta.activities.base
 
 import androidx.lifecycle.ViewModel
 
