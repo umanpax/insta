@@ -4,6 +4,4 @@ import androidx.lifecycle.ViewModel
 
 class GridViewModel : ViewModel(
 ) {
-
-
 }

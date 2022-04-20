@@ -4,14 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.*
 import android.os.StrictMode
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import com.insta.R
 import com.insta.activities.base.BaseActivity
 import com.insta.model.Photo
-import com.insta.services.room.repository.RoomRepository
 import com.insta.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

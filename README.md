@@ -1,10 +1,16 @@
 # insta
 MINI APP PRESENTANT UNE INTERFACE HOME INSTAGRAM, AVEC UN PETIT MOTEUR DE RECHERCHE
-DESIGN PATTERN : MVVM
+
+ARCHI 
+- MVVM
+- LIVEDATA
+- KOIN
+- ROOM
+- MOCKITO / JUNIT
+- EXPRESSO
 
 
-POUR ROOM : 
-
+POUR ROOM :
 mettre dans proguard-rules.pro : 
 -keep class  app.mypackage.model.** { *; }
 

@@ -8,6 +8,7 @@ import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+
 @TypeConverters
 @Entity(tableName = "user")
 data class User(

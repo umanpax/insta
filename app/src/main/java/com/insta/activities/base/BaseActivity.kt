@@ -15,7 +15,6 @@ import com.insta.fragments.home.HomeFragment
 import com.insta.fragments.likes.LikesFragment
 import com.insta.fragments.profile.ProfileFragment
 import com.insta.fragments.search.SearchFragment
-import com.insta.utils.KoinApplication
 import com.insta.utils.Workflow
 
 

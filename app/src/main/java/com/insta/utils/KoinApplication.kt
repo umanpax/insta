@@ -16,7 +16,8 @@ class KoinApplication : Application() {
                     AppModule.photoViewModel,
                     AppModule.splashViewModel,
                     AppModule.moduleRepository,
-                    AppModule.instaRoomRepository
+                    AppModule.instaRoomRepository,
+                    AppModule.moduleDataManager
                 )
             )
         }

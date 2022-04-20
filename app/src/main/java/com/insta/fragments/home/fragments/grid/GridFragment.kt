@@ -1,6 +1,5 @@
 package com.insta.fragments.home.fragments.grid
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +10,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.insta.activities.base.BaseActivity
 import com.insta.utils.Application
 import com.insta.R
-import com.insta.activities.photodetails.PhotoDetailsActivity
 import com.insta.model.Photo
-import com.insta.utils.ApplicationConstants
 import com.insta.utils.PrefsManager
 import com.insta.utils.Workflow
 
