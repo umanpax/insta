@@ -12,18 +12,13 @@ import io.reactivex.Observable
  * Created by pierre-alexandrevezinet on 24/03/2022.
  *
  */
-class DataManager {
-
-    var baseUrl: String = ""
-    var serviceGenerator: ServiceGenerator
+class DataManager(private val serviceGenerator: ServiceGenerator) {
 
     /**
      * @param baseUrl
      */
-    constructor(baseUrl: String) {
-        this.baseUrl = baseUrl
-        serviceGenerator = ServiceGenerator(baseUrl)
-    }
+    constructor(baseUrl: String): this(ServiceGenerator(baseUrl))
+
 
     fun getPhotoByUserName(username : String, stats : Boolean, token : String): Observable<Array<Photo>> {
         val service = serviceGenerator.createService(IService::class.java,token)

@@ -9,7 +9,6 @@ import android.view.View
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
 import com.insta.R
 import java.text.DateFormat
@@ -54,6 +53,7 @@ class Application {
         fun changeStatusBarColor(activity: Activity, color: Int) {
             val window: Window = activity.window
             window.statusBarColor = ContextCompat.getColor(activity, color)
+            window.setUiOptions(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         }
 
 

@@ -18,30 +18,21 @@ import com.insta.model.Photo
 import com.insta.model.Statistics
 import com.insta.utils.Application
 import com.insta.utils.ApplicationConstants
-import com.insta.utils.PrefsManager
 import kotlin.collections.ArrayList
 
 
 class PhotoDetailsAdapter(
-    mListPhotosStatistics: Pair<ArrayList<Photo>,ArrayList<Statistics>>,
-    mView: Context,
-    mViewModel: PhotoDetailsViewModel
+    private val listPhotosStatistics: Pair<ArrayList<Photo>,ArrayList<Statistics>>,
+    private val context: Context,
+    private val viewModel: PhotoDetailsViewModel
 ) :
     RecyclerView.Adapter<PhotoDetailsAdapter.ActualityView>() {
-    private var listPhotosStatistics: Pair<ArrayList<Photo>,ArrayList<Statistics>>? = null
-    private var prefsManager: PrefsManager? = null
-    private var view: Context? = null
-    private var viewModel: PhotoDetailsViewModel? = null
 
     init {
-        view = mView
-        viewModel = mViewModel
-        listPhotosStatistics = mListPhotosStatistics
-        prefsManager = PrefsManager(mView)
     }
 
     class ActualityView(v: View) : RecyclerView.ViewHolder(v) {
-        var imvPhotoContent: ImageView? = null
+        val imvPhotoContent: ImageView = v.findViewById(R.id.imv_photo_content)
         var linearProfilePhotoAuthor: LinearLayout? = null
         var imvPhotoProfileAuthor: ImageView? = null
         var tvUserNameAuthor: TextView? = null
@@ -53,7 +44,6 @@ class PhotoDetailsAdapter(
         var viewRoundColor: View? = null
 
         init {
-            imvPhotoContent = v.findViewById(R.id.imv_photo_content)
             linearProfilePhotoAuthor = v.findViewById(R.id.linear_profile_photo_author)
             imvPhotoProfileAuthor = v.findViewById(R.id.imv_photo_profile_author)
             tvUserNameAuthor = v.findViewById(R.id.tv_username_author)
@@ -69,17 +59,16 @@ class PhotoDetailsAdapter(
     @SuppressLint("SetTextI18n", "Range")
     override fun onBindViewHolder(holder: ActualityView, position: Int) {
         holder.setIsRecyclable(false)
-        val photo = listPhotosStatistics!!.first[position]
-        val statistic = listPhotosStatistics!!.second[position]
-
-        if (photo.urls!!.full.isNotEmpty()) {
-            Glide.with(view!!)
-                .load(photo.urls!!.regular)
-                .into(holder.imvPhotoContent!!)
+        val photo = listPhotosStatistics.first[position]
+        val statistic = listPhotosStatistics.second[position]
+        photo.urls?.let { urls ->
+            Glide.with(context)
+                .load(urls.regular)
+                .into(holder.imvPhotoContent)
         }
 
         if (photo.user?.profile_image!!.small.isNotEmpty()) {
-            Glide.with(view!!)
+            Glide.with(context)
                 .load(photo.user!!.profile_image!!.medium)
                 .transform( CenterCrop(), RoundedCorners(60))
                 .into(holder.imvPhotoProfileAuthor!!)
@@ -90,8 +79,8 @@ class PhotoDetailsAdapter(
         val creationDate = Application.convertToFormatSpecific(ApplicationConstants.yyyyMMdd, ApplicationConstants.ddMMyyyy, photo.created_at!!.split("T")[0])
         holder.tvDatePhoto?.text = creationDate
         holder.tvCountLikesPhoto?.text = statistic.likes.total.toString()
-        holder.tvCountLikesPhoto?.text = view?.getString(R.string.count_likes,statistic.likes.total.toString())
-        holder.tvDownloadsCountPhoto?.text = view?.getString(R.string.count_downloads,statistic.downloads.total.toString())
+        holder.tvCountLikesPhoto?.text = context.getString(R.string.count_likes,statistic.likes.total.toString())
+        holder.tvDownloadsCountPhoto?.text = context.getString(R.string.count_downloads,statistic.downloads.total.toString())
         holder.tvColourCodePhoto?.text = photo.color
         holder.viewRoundColor?.background?.setTint(Color.parseColor(photo.color))
     }
@@ -103,7 +92,7 @@ class PhotoDetailsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return listPhotosStatistics!!.first.size
+        return listPhotosStatistics.first.size
     }
 
     override fun getItemViewType(position: Int): Int {

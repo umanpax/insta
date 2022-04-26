@@ -38,5 +38,9 @@ class AppModule {
             single { RoomRepository() }
         }
 
+        val service = module {
+            single { RoomRepository() }
+        }
+
     }
 }
